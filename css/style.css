@@ -1,3 +1,89 @@
+#app {
+  width: 45%;
+  margin: 0 auto;
+  margin-top: 20px;
+}
 
+#simon-body {
+  filter: url("#light");
+  box-shadow: 50px 50px 0px black;
+}
+
+#controls {
+  fill: #989c9d;
+}
+
+#bottom-half {
+  stroke: black;
+  stroke-width: 5px;
+  fill: #989c9d;
+}
+
+#gameTitle {
+  text-anchor: middle;
+  font-size: 9em;
+  fill: #989c9d;
+}
+
+#count {
+  text-anchor: middle;
+  font-size: 4em;
+  fill: #fa0000;
+}
+
+#countDisplay {
+  fill: #320000;
+  stroke: black;
+  stroke-width: 10px;
+}
+
+#start {
+  fill: #b01d0f;
+  stroke: black;
+  stroke-width: 15px;
+}
+
+#strick {
+  fill: #bfb925;
+  stroke: black;
+  stroke-width: 15px;
+}
+
+#strickLight {
+  stroke: black;
+  stroke-width: 5px;
+}
+
+#strickLight.on {
+  fill: #b01d0f;
+}
+
+.btn {
+  filter: url("#blur");
+  overflow: hidden;
+  mask: url("../glass.jpg");
+  -webkit-mask-mode: luminance;
+  mask-mode: luminance;
+}
+
+.item {
+  mask: url(#masking);
+}
+
+#red-btn {
+  fill: #b01d0f;
+}
+
+#blue-btn {
+  fill: #016dba;
+}
+
+#green-btn {
+  fill: #37ab44;
+}
+
+#yellow-btn {
+  fill: #bfb925;
+}
 
 /*# sourceMappingURL=style.css.map */

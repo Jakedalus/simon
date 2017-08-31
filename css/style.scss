@@ -1,0 +1,119 @@
+
+#app {
+    width: 45%;
+    margin: 0 auto;
+    margin-top: 20px;
+//    background-image: url("../glass.jpg");
+}
+
+#simon-body {
+    filter: url('#light');
+    box-shadow: 50px 50px 0px black;
+//    opacity: .9;
+
+}
+
+#controls {
+    fill: rgb(152, 156, 157);
+}
+
+#bottom-half {
+    stroke: black;
+    stroke-width: 5px;
+    fill: rgb(152, 156, 157);
+}
+
+#gameTitle {
+    text-anchor: middle;
+    font-size: 9em;
+    fill: rgb(152, 156, 157);
+}
+
+#count {
+    text-anchor: middle;
+    font-size: 4em;
+    fill: rgb(250, 0, 0);;
+}
+
+#countDisplay {
+    fill: rgb(50, 0, 0);
+    stroke: black;
+    stroke-width: 10px;
+}
+
+#start {
+    fill: rgb(176, 29, 15);
+    stroke: black;
+    stroke-width: 15px;
+}
+
+#strick {
+    fill: rgb(191, 185, 37);
+    stroke: black;
+    stroke-width: 15px;
+}
+
+#strickLight {
+    stroke: black;
+    stroke-width: 5px;
+}
+
+#strickLight.on {
+    fill: rgb(176, 29, 15);
+}
+
+.btn {
+    filter: url('#blur');
+    overflow: hidden;
+//    opacity: .7;
+
+    mask: url("../glass.jpg");
+//    mask: url("../Green_wool_texture.png");
+//    mask: url(#masking);
+    
+    -webkit-mask-mode: luminance;
+    mask-mode: luminance;
+    
+}
+
+.item {
+  mask: url(#masking);
+  }
+
+#red-btn {
+    fill: rgb(176, 29, 15);
+}
+
+#blue-btn {
+    fill: rgb(1, 109, 186);
+}
+
+#green-btn {
+    fill: rgb(55, 171, 68);
+}
+
+#yellow-btn {
+    fill: rgb(191, 185, 37);
+}
+
+//#red-btn:hover {
+//    fill: darkred;
+//    stroke: purple;
+//}
+//
+//#blue-btn:hover {
+//    fill: blue;
+//    stroke: purple;
+//}
+//
+//#green-btn:hover {
+//    fill: green;
+//    stroke: purple;
+//}
+//
+//#yellow-btn:hover {
+//    fill: lightyellow;
+//    stroke: purple;
+//
+//}
+
