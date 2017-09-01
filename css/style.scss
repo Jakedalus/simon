@@ -10,9 +10,9 @@ html {
 }
 
 #app {
-    width: 45%;
+    width: 50%;
     margin: 0 auto;
-    margin-top: 20px;
+    margin-top: 30px;
 //    background-image: url("../glass.jpg");
 }
 
@@ -111,24 +111,21 @@ html {
     fill: rgb(191, 185, 37);
 }
 
-//#red-btn:hover {
-//    fill: darkred;
-//    stroke: purple;
-//}
-//
-//#blue-btn:hover {
-//    fill: blue;
-//    stroke: purple;
-//}
-//
-//#green-btn:hover {
-//    fill: green;
-//    stroke: purple;
-//}
-//
-//#yellow-btn:hover {
-//    fill: lightyellow;
-//    stroke: purple;
-//
-//}
+@media (max-width: 1080px) {
+    #app {
+        width: 60%;
+    }
+}
+
+@media (max-width: 800px) {
+    #app {
+        width: 80%;
+    }
+}
+
+@media (max-width: 500px) {
+    #app {
+        width: 100%;
+    }
+}
 
