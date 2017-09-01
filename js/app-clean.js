@@ -232,6 +232,7 @@ strickBtn.addEventListener('click', function() {
 });
 
 // Mouse Events
+if (typeof window.orientation !== 'undefined') {
 buttons.forEach(function(button) {
     
     
@@ -306,6 +307,7 @@ buttons.forEach(function(button) {
     });
 
 });
+} else {
     
 // Touch Events
 buttons.forEach(function(button) {
@@ -382,4 +384,5 @@ buttons.forEach(function(button) {
     });
 
 });
+}
 
