@@ -232,7 +232,7 @@ strickBtn.addEventListener('click', function() {
 });
 
 // Mouse Events
-if (typeof window.orientation !== 'undefined') {
+if (typeof window.orientation === 'undefined') {
 buttons.forEach(function(button) {
     
     
