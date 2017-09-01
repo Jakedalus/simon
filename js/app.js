@@ -231,7 +231,7 @@ strickBtn.addEventListener('click', function() {
     } 
 });
 
-
+// Mouse Events
 buttons.forEach(function(button) {
     console.log(button.id);
     
@@ -307,4 +307,79 @@ buttons.forEach(function(button) {
 
 });
     
+// Touch Events
+buttons.forEach(function(button) {
+    console.log(button.id);
+    
+    button.addEventListener('touchstart', function() {
+        if(playersTurn) {
+            playerMove = button.id;
+            console.log(playerMove);
+            switch(button.id) {
+                case 'green-btn':
+                    button.style.fill = lightgreen;
+                    greenSound.start(0);
+                    break;
+                case 'red-btn':
+                    button.style.fill = lightred;
+                    redSound.start(0);
+                    break;
+                case 'yellow-btn':
+                    button.style.fill = lightyellow;
+                    yellowSound.start(0);
+                    break;
+                case 'blue-btn':
+                    button.style.fill = lightblue;
+                    blueSound.start(0);
+                    break;
+
+            }
+        }
+    });
+    
+    button.addEventListener('touchend', function() {
+        if(playersTurn) {
+            switch(button.id) {
+                case 'green-btn':
+                    button.style.fill = darkgreen;
+                    greenSound.stop();
+                    greenSound = audioCtx.createOscillator();
+                    greenSound.frequency.value = 164.81;
+                    greenSound.type = 'triangle';
+                    greenSound.connect(audioCtx.destination);
+                    checkPlayer();
+                    break;
+                case 'red-btn':
+                    button.style.fill = darkred;
+                    redSound.stop();
+                    redSound = audioCtx.createOscillator();
+                    redSound.frequency.value = 440.00;
+                    redSound.type = 'triangle';
+                    redSound.connect(audioCtx.destination);
+                    checkPlayer();
+                    break;
+                case 'yellow-btn':
+                    button.style.fill = darkyellow;
+                    yellowSound.stop();
+                    yellowSound = audioCtx.createOscillator();
+                    yellowSound.frequency.value = 277.18;
+                    yellowSound.type = 'triangle';
+                    yellowSound.connect(audioCtx.destination);
+                    checkPlayer();
+                    break;
+                case 'blue-btn':
+                    button.style.fill = darkblue;
+                    blueSound.stop();
+                    blueSound = audioCtx.createOscillator();
+                    blueSound.frequency.value = 329.63;
+                    blueSound.type = 'triangle';
+                    blueSound.connect(audioCtx.destination);
+                    checkPlayer();
+                    break;
+
+            }
+        }
+    });
+
+});
 
