@@ -232,7 +232,7 @@ strickBtn.addEventListener('click', function() {
 });
 
 // Mouse Events
-if (typeof window.orientation === 'undefined') {
+if( !/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
 buttons.forEach(function(button) {
     console.log(button.id);
     
@@ -308,7 +308,6 @@ buttons.forEach(function(button) {
 
 });
 } else {
-    
 // Touch Events
 buttons.forEach(function(button) {
     console.log(button.id);
