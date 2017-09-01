@@ -80,6 +80,11 @@ html {
   fill: #b01d0f;
 }
 
+#power-switch {
+  fill: #016dba;
+  transition: x .2s;
+}
+
 .item {
   mask: url(#masking);
 }

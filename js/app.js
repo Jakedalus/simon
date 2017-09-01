@@ -52,6 +52,11 @@ var startBtn = document.querySelector('#start');
 var strickBtn = document.querySelector("#strick");
 var strickLight = document.querySelector("#strickLight");
 var ctrDisplay = document.querySelector('#count');
+var powerBtn = document.querySelector("#power");
+var powerSwitch = document.querySelector("#power-switch");
+console.log(powerBtn);
+console.log(powerSwitch);
+console.log(powerSwitch.getAttribute('x'));
 
 
 // Game State Variables /////
@@ -59,59 +64,93 @@ var sequence = [];
 var gameStarted = false;
 var playersTurn = false;
 var strickMode = false;
+var powerOn = false;
 var playerMove = '';
 var position = 0;
 
+var interval;
+
+function playGreen() {
+    greenBtn.style.fill = lightgreen;
+    greenSound.start(0);
+}
+
+function stopGreen() {
+    greenBtn.style.fill = darkgreen;
+    greenSound.stop();
+    greenSound = audioCtx.createOscillator();
+    greenSound.frequency.value = 164.81;
+    greenSound.type = 'triangle';
+    greenSound.connect(audioCtx.destination);
+}
+
+function playRed() {
+    redBtn.style.fill = lightred;
+    redSound.start(0);
+}
+
+function stopRed() {
+    redBtn.style.fill = darkred;
+    redSound.stop();
+    redSound = audioCtx.createOscillator();
+    redSound.frequency.value = 440.00;
+    redSound.type = 'triangle';
+    redSound.connect(audioCtx.destination);
+}
+
+function playYellow() {
+    yellowBtn.style.fill = lightyellow;
+    yellowSound.start(0);
+}
+
+function stopYellow() {
+    yellowBtn.style.fill = darkyellow;
+    yellowSound.stop();
+    yellowSound = audioCtx.createOscillator();
+    yellowSound.frequency.value = 277.18;
+    yellowSound.type = 'triangle';
+    yellowSound.connect(audioCtx.destination);
+}
+
+function playBlue() {
+    blueBtn.style.fill = lightblue;
+    blueSound.start(0);
+}
+
+function stopBlue() {
+    blueBtn.style.fill = darkblue;
+    blueSound.stop();
+    blueSound = audioCtx.createOscillator();
+    blueSound.frequency.value = 329.63;
+    blueSound.type = 'triangle';
+    blueSound.connect(audioCtx.destination);
+}
 
 function playLightAndSound(tile) {
     console.log(tile);
     switch(tile) {
             case 'green-btn':
-                greenBtn.style.fill = lightgreen;
-                greenSound.start(0);
+                playGreen();
                 setTimeout(function() {
-                    greenBtn.style.fill = darkgreen;
-                    greenSound.stop();
-                    greenSound = audioCtx.createOscillator();
-                    greenSound.frequency.value = 164.81;
-                    greenSound.type = 'triangle';
-                    greenSound.connect(audioCtx.destination);
+                    stopGreen();
                 }, 500);
                 break;
             case 'red-btn':
-                redBtn.style.fill = lightred;
-                redSound.start(0);
+                playRed();
                 setTimeout(function() {
-                    redBtn.style.fill = darkred;
-                    redSound.stop();
-                    redSound = audioCtx.createOscillator();
-                    redSound.frequency.value = 440.00;
-                    redSound.type = 'triangle';
-                    redSound.connect(audioCtx.destination);
+                    stopRed();
                 }, 500);
                 break;
             case 'yellow-btn':
-                yellowBtn.style.fill = lightyellow;
-                yellowSound.start(0);
+                playYellow();
                 setTimeout(function() {
-                    yellowBtn.style.fill = darkyellow;
-                    yellowSound.stop();
-                    yellowSound = audioCtx.createOscillator();
-                    yellowSound.frequency.value = 277.18;
-                    yellowSound.type = 'triangle';
-                    yellowSound.connect(audioCtx.destination);
+                    stopYellow();
                 }, 500);
                 break;
             case 'blue-btn':
-                blueBtn.style.fill = lightblue;
-                blueSound.start(0);
+                playBlue();
                 setTimeout(function() {
-                    blueBtn.style.fill = darkblue;
-                    blueSound.stop();
-                    blueSound = audioCtx.createOscillator();
-                    blueSound.frequency.value = 329.63;
-                    blueSound.type = 'triangle';
-                    blueSound.connect(audioCtx.destination);
+                    stopBlue();
                 }, 500);
                 break;
 
@@ -120,11 +159,22 @@ function playLightAndSound(tile) {
     
 }
 
+function wrong() {
+    wrongSound.start(0);
+    setTimeout(function() {
+        wrongSound.stop();
+        wrongSound = audioCtx.createOscillator();
+        wrongSound.frequency.value = 42;
+        wrongSound.type = 'triangle';
+        wrongSound.connect(audioCtx.destination);
+    }, 1500);
+}
+
 
 
 function simonSays(tryAgain) {
     
-    playersTurn = false;
+    
     
     
     if(!tryAgain) {
@@ -137,16 +187,26 @@ function simonSays(tryAgain) {
     ctrDisplay.textContent = count;
     
     var ctr = 0;
-    var interval = setInterval(function() {
+    interval = setInterval(function() {
+        playersTurn = false;
+        console.log("**Playing ", ctr, " move in the sequence of length", sequence.length, " .");
+        console.log("interval id: ", interval);
         playLightAndSound(sequence[ctr]);
         ctr++;
-        console.log(ctr);
         
-        if(ctr >= sequence.length) {
+        
+        
+        if(ctr === sequence.length) {
+            console.log("INTERVAL CLEARED!!!");
             clearInterval(interval);
-            playersTurn = true;
+            setTimeout(function() {
+                playersTurn = true;
+                console.log("////IT IS NOW PLAYER'S TURN!!////");
+                console.log("Player's turn: ", playersTurn);
+            }, 605);
+            
         }
-
+        console.log("Player's turn: ", playersTurn);
         
     }, 600);
     
@@ -161,36 +221,44 @@ function simonSays(tryAgain) {
 
 
 function checkPlayer() {
+    playersTurn = false;
     
     if(playerMove === sequence[position]) {
         position++;
+        playersTurn = true;
         console.log("///Correct!");
         console.log("Sequence: ", sequence, " position: ", position);
         // Check if player has won
         if(position === 20) {  // Player has gotten 20 right
-            gameOver();
+            playerWon();
         }
 //        if(position === 3) {  // Player has gotten 3 right, for debugging
-//            gameOver();
+//            playerWon();
 //        }
     } else {
         position = 0;
+        playersTurn = false;
         console.log("///Wrong!!!");
         console.log("Sequence: ", sequence, " position: ", position);
         console.log("Wrong player move: ", playerMove, " Correct move: ", sequence[position]);
+        setTimeout(function() {
+            wrong();
+        }, 200);
         // replay sequence, or create new one
-        if(!strickMode) {
-            simonSays(true);  // repeat sequence = true
-        } else {
-            var newSeq = [];
-            for(var i = 0; i < sequence.length; i++) {
-                var newTile = ['green-btn', 'red-btn', 'yellow-btn', 'blue-btn'][Math.floor(Math.random() * 4)];
+        setTimeout(function() {
+            if(!strickMode) {
+                simonSays(true);  // repeat sequence = true
+            } else {
+                var newSeq = [];
+                for(var i = 0; i < sequence.length; i++) {
+                    var newTile = ['green-btn', 'red-btn', 'yellow-btn', 'blue-btn'][Math.floor(Math.random() * 4)];
 
-                newSeq.push(newTile);
+                    newSeq.push(newTile);
+                }
+                sequence = newSeq;
+                simonSays(true);
             }
-            sequence = newSeq;
-            simonSays(true);
-        }
+        }, 1700);
         
     }
     
@@ -202,186 +270,230 @@ function checkPlayer() {
     
 }
 
-function gameOver() {
-    console.log("Player won!");
+function playerWon() {
+    // Play sequence of sounds if player got 20 in a row
+    // Once
+    setTimeout(function() {
+        playRed();
+        setTimeout(function() {
+            stopRed();
+        }, 100);
+    }, 100);
+    
+    setTimeout(function() {
+        playYellow();
+        setTimeout(function() {
+            stopYellow();
+        }, 100);
+    }, 300);
+    
+    setTimeout(function() {
+        playBlue();
+        setTimeout(function() {
+            stopBlue();
+        }, 100);
+    }, 500);
+    
+    setTimeout(function() {
+        playGreen();
+        setTimeout(function() {
+            stopGreen();
+        }, 100);
+    }, 700);
+    
+    // Twice
+    setTimeout(function() {
+        playRed();
+        setTimeout(function() {
+            stopRed();
+        }, 100);
+    }, 900);
+    
+    setTimeout(function() {
+        playYellow();
+        setTimeout(function() {
+            stopYellow();
+        }, 100);
+    }, 1100);
+    
+    setTimeout(function() {
+        playBlue();
+        setTimeout(function() {
+            stopBlue();
+        }, 100);
+    }, 1300);
+    
+    setTimeout(function() {
+        playGreen();
+        setTimeout(function() {
+            stopGreen();
+        }, 100);
+    }, 1500);
+    
+    // Three Times
+    setTimeout(function() {
+        playRed();
+        setTimeout(function() {
+            stopRed();
+        }, 100);
+    }, 1700);
+    
+    setTimeout(function() {
+        playYellow();
+        setTimeout(function() {
+            stopYellow();
+        }, 100);
+    }, 1900);
+    
+    setTimeout(function() {
+        playBlue();
+        setTimeout(function() {
+            stopBlue();
+        }, 100);
+    }, 2100);
+    
+    setTimeout(function() {
+        playGreen();
+        setTimeout(function() {
+            stopGreen();
+            wrongSound.start(0);
+            setTimeout(function() {
+                wrongSound.stop();
+                wrongSound = audioCtx.createOscillator();
+                wrongSound.frequency.value = 42;
+                wrongSound.type = 'triangle';
+                wrongSound.connect(audioCtx.destination);
+            }, 3500);
+        }, 100);
+    }, 2300);
+    
+    
+    
+    restartGame();
+}
+
+function restartGame() {
     
     sequence = [];
     position = 0;
     gameStarted = false;
     ctrDisplay.textContent = '--';
+    playersTurn = false;
     
 }
     
-
 startBtn.addEventListener('click', function() {
-    if(!gameStarted) simonSays(false);
-    gameStarted = true;
+    if(powerOn) {
+        if(!gameStarted) simonSays(false);
+        gameStarted = true;
+    }
 });
 
 strickBtn.addEventListener('click', function() {
-    if(!gameStarted) {
-        
-        strickMode = !strickMode;
-        if(strickMode) {
-            strickLight.classList.add('on');
-        } else {
-            strickLight.classList.remove('on');
-        }
-        
-    } 
+    if(powerOn) {
+        if(!gameStarted) {
+
+            strickMode = !strickMode;
+            if(strickMode) {
+                strickLight.classList.add('on');
+            } else {
+                strickLight.classList.remove('on');
+            }
+
+        } 
+    }
 });
+
+
+
+powerBtn.addEventListener('click', function() {
+    powerOn = !powerOn;
+    console.log(powerOn);
+    
+    if(powerOn) {
+        powerSwitch.setAttribute('x', 760);
+        restartGame();
+        
+    } else {
+        powerSwitch.setAttribute('x', 720);
+        ctrDisplay.textContent = '';
+    }
+});
+
+function pushDown(id) {
+    if(playersTurn && powerOn) {
+        playerMove = id;
+        console.log("**Player pushed: ", playerMove);
+        switch(id) {
+            case 'green-btn':
+                playGreen();
+                break;
+            case 'red-btn':
+                playRed();
+                break;
+            case 'yellow-btn':
+                playYellow();
+                break;
+            case 'blue-btn':
+                playBlue();
+                break;
+
+        }
+    }
+}
+
+function liftUp(id) {
+    if(playersTurn && powerOn) {
+        switch(id) {
+            case 'green-btn':
+                stopGreen();
+                checkPlayer();
+                break;
+            case 'red-btn':
+                stopRed();
+                checkPlayer();
+                break;
+            case 'yellow-btn':
+                stopYellow();
+                checkPlayer();
+                break;
+            case 'blue-btn':
+                stopBlue();
+                checkPlayer();
+                break;
+
+        }
+    }
+}
 
 // Mouse Events
 if( !/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-buttons.forEach(function(button) {
-    console.log(button.id);
-    
-    button.addEventListener('mousedown', function() {
-        if(playersTurn) {
-            playerMove = button.id;
-            console.log(playerMove);
-            switch(button.id) {
-                case 'green-btn':
-                    button.style.fill = lightgreen;
-                    greenSound.start(0);
-                    break;
-                case 'red-btn':
-                    button.style.fill = lightred;
-                    redSound.start(0);
-                    break;
-                case 'yellow-btn':
-                    button.style.fill = lightyellow;
-                    yellowSound.start(0);
-                    break;
-                case 'blue-btn':
-                    button.style.fill = lightblue;
-                    blueSound.start(0);
-                    break;
+    buttons.forEach(function(button) {
+        console.log(button.id);
 
-            }
-        }
+        button.addEventListener('mousedown', function() {
+            pushDown(button.id);
+        });
+
+        button.addEventListener('mouseup', function() {
+           liftUp(button.id); 
+        });
+
     });
-    
-    button.addEventListener('mouseup', function() {
-        if(playersTurn) {
-            switch(button.id) {
-                case 'green-btn':
-                    button.style.fill = darkgreen;
-                    greenSound.stop();
-                    greenSound = audioCtx.createOscillator();
-                    greenSound.frequency.value = 164.81;
-                    greenSound.type = 'triangle';
-                    greenSound.connect(audioCtx.destination);
-                    checkPlayer();
-                    break;
-                case 'red-btn':
-                    button.style.fill = darkred;
-                    redSound.stop();
-                    redSound = audioCtx.createOscillator();
-                    redSound.frequency.value = 440.00;
-                    redSound.type = 'triangle';
-                    redSound.connect(audioCtx.destination);
-                    checkPlayer();
-                    break;
-                case 'yellow-btn':
-                    button.style.fill = darkyellow;
-                    yellowSound.stop();
-                    yellowSound = audioCtx.createOscillator();
-                    yellowSound.frequency.value = 277.18;
-                    yellowSound.type = 'triangle';
-                    yellowSound.connect(audioCtx.destination);
-                    checkPlayer();
-                    break;
-                case 'blue-btn':
-                    button.style.fill = darkblue;
-                    blueSound.stop();
-                    blueSound = audioCtx.createOscillator();
-                    blueSound.frequency.value = 329.63;
-                    blueSound.type = 'triangle';
-                    blueSound.connect(audioCtx.destination);
-                    checkPlayer();
-                    break;
-
-            }
-        }
-    });
-
-});
 } else {
-// Touch Events
-buttons.forEach(function(button) {
-    console.log(button.id);
-    
-    button.addEventListener('touchstart', function() {
-        if(playersTurn) {
-            playerMove = button.id;
-            console.log(playerMove);
-            switch(button.id) {
-                case 'green-btn':
-                    button.style.fill = lightgreen;
-                    greenSound.start(0);
-                    break;
-                case 'red-btn':
-                    button.style.fill = lightred;
-                    redSound.start(0);
-                    break;
-                case 'yellow-btn':
-                    button.style.fill = lightyellow;
-                    yellowSound.start(0);
-                    break;
-                case 'blue-btn':
-                    button.style.fill = lightblue;
-                    blueSound.start(0);
-                    break;
+    // Touch Events
+    buttons.forEach(function(button) {
+        console.log(button.id);
 
-            }
-        }
+        button.addEventListener('touchstart', function() {
+            pushDown(button.id);
+        });
+
+        button.addEventListener('touchend', function() {
+            liftUp(button.id);
+        });
+
     });
-    
-    button.addEventListener('touchend', function() {
-        if(playersTurn) {
-            switch(button.id) {
-                case 'green-btn':
-                    button.style.fill = darkgreen;
-                    greenSound.stop();
-                    greenSound = audioCtx.createOscillator();
-                    greenSound.frequency.value = 164.81;
-                    greenSound.type = 'triangle';
-                    greenSound.connect(audioCtx.destination);
-                    checkPlayer();
-                    break;
-                case 'red-btn':
-                    button.style.fill = darkred;
-                    redSound.stop();
-                    redSound = audioCtx.createOscillator();
-                    redSound.frequency.value = 440.00;
-                    redSound.type = 'triangle';
-                    redSound.connect(audioCtx.destination);
-                    checkPlayer();
-                    break;
-                case 'yellow-btn':
-                    button.style.fill = darkyellow;
-                    yellowSound.stop();
-                    yellowSound = audioCtx.createOscillator();
-                    yellowSound.frequency.value = 277.18;
-                    yellowSound.type = 'triangle';
-                    yellowSound.connect(audioCtx.destination);
-                    checkPlayer();
-                    break;
-                case 'blue-btn':
-                    button.style.fill = darkblue;
-                    blueSound.stop();
-                    blueSound = audioCtx.createOscillator();
-                    blueSound.frequency.value = 329.63;
-                    blueSound.type = 'triangle';
-                    blueSound.connect(audioCtx.destination);
-                    checkPlayer();
-                    break;
-
-            }
-        }
-    });
-
-});
 }
+
 

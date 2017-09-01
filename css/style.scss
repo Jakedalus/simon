@@ -77,6 +77,11 @@ html {
     fill: rgb(176, 29, 15);
 }
 
+#power-switch {
+    fill: rgb(1, 109, 186);
+    transition: x .2s;
+}
+
 .btn {
 //    filter: url('#blur');
 //    overflow: hidden;
