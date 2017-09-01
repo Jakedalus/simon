@@ -1,3 +1,13 @@
+html {
+    background: url('../carpet.jpg');
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
 
 #app {
     width: 45%;
@@ -15,6 +25,11 @@
 
 #controls {
     fill: rgb(152, 156, 157);
+}
+
+.label {
+    font-size: 2em;
+    text-anchor: middle;
 }
 
 #bottom-half {
@@ -63,16 +78,16 @@
 }
 
 .btn {
-    filter: url('#blur');
-    overflow: hidden;
+//    filter: url('#blur');
+//    overflow: hidden;
 //    opacity: .7;
 
-    mask: url("../glass.jpg");
+//    mask: url("../glass.jpg");
 //    mask: url("../Green_wool_texture.png");
 //    mask: url(#masking);
-    
-    -webkit-mask-mode: luminance;
-    mask-mode: luminance;
+//    
+//    -webkit-mask-mode: luminance;
+//    mask-mode: luminance;
     
 }
 

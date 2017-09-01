@@ -1,3 +1,20 @@
+html {
+  background: url("../carpet.jpg");
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Safari */
+  -khtml-user-select: none;
+  /* Konqueror HTML */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+  user-select: none;
+  /* Non-prefixed version, currently
+     supported by Chrome and Opera */
+}
+
 #app {
   width: 45%;
   margin: 0 auto;
@@ -11,6 +28,11 @@
 
 #controls {
   fill: #989c9d;
+}
+
+.label {
+  font-size: 2em;
+  text-anchor: middle;
 }
 
 #bottom-half {
@@ -56,14 +78,6 @@
 
 #strickLight.on {
   fill: #b01d0f;
-}
-
-.btn {
-  filter: url("#blur");
-  overflow: hidden;
-  mask: url("../glass.jpg");
-  -webkit-mask-mode: luminance;
-  mask-mode: luminance;
 }
 
 .item {

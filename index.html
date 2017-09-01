@@ -17,7 +17,7 @@
 <!--            <img src="simon_v2.svg" width="600" height="600">-->
             
             
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 1500">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1600">
                 <defs>
                     <style>
                         .cls-1{fill:#222;}
@@ -27,6 +27,7 @@
                         .cls-5{fill:#f82915;}
                     </style>
                     
+<!--
                     <mask id="masking" maskUnits="objectBoundingBox" 
                       maskContentUnits="objectBoundingBox">
                       <rect y="0" width="1" height="1" fill="url(#gradient)" />
@@ -38,19 +39,37 @@
                     <mask id="glass">
 
                     </mask>
+-->
                     
 
                     <filter id="light">
                         <feSpecularLighting result="specOut" specularExponent="20" lighting-color="#bbbbbb">
                           <fePointLight x="1250" y="1250" z="300"/>
                         </feSpecularLighting>
-                        <feComposite in="SourceGraphic" in2="specOut"
+<!--                        <feImage xlink:href="carpet.jpg" />-->
+                        <feComposite result="comp" in="SourceAlpha" in2="specOut"
                             operator="arithmetic" k1="0" k2="1" k3="1" k4="0"/>
+
                     </filter>
                     
+                    <filter id="shadow">
+                        <feGaussianBlur in="SourceGraphic" stdDeviation="10" />
+                        <feOffset dx="10" dy="15" />
+                        <feMerge>
+                            <feMergeNode />
+                            <feMergeNode in="SourceGraphic" />
+                        </feMerge>
+                    </filter>
+                    
+                    <clipPath id="containLight">
+                        <circle cx="750" cy="750" r="750"/>
+                    </clipPath>
+                    
+<!--
                     <filter id="blur">
                         <feGaussianBlur stdDeviation="1" />
                     </filter>
+-->
                     
                     <clipPath id="topHalf">
                         <rect x="150" y="150" width="2000" height="550" />
@@ -62,8 +81,9 @@
 
                 </defs>
                 <title>simon</title>
-
-                <g ><circle id="simon-body" class="cls-1" cx="750" cy="750" r="750"/></g>
+                <circle id="shadowCircle" filter="url(#shadow)" cx="750" cy="750" r="750"/>
+                <g ><circle clip-path="url(#containLight)" id="simon-body" class="cls-1" cx="750" cy="750" r="750"/></g>
+                
                 
                 <g><circle id="controls" cx="750" cy="750" r="300"/></g>
                 <circle id="top-half" cx="750" cy="750" r="290" clip-path="url(#topHalf)"/>
@@ -74,11 +94,14 @@
                 
                 <rect id="countDisplay" x="510" y ="800" rx="30" ry="30" width="160" height="90"/>
                 <text id="count" x="590" y ="870">--</text>
+                <text class="label" x="590" y ="930">Count</text>
                 
                 <circle id="start" cx="750" cy="850" r="30"/>
+                <text class="label" x="750" y ="930">Start</text>
                 
                 <circle id="strick" cx="890" cy="850" r="30"/>
                 <circle class="" id="strickLight" cx="890" cy="790" r="10"/>
+                <text class="label" x="890" y ="930">Strick</text>
 
                 <g ><path id="green-btn" class="cls-2 btn" d="M255.64,48C102.15,69.4-19.39,191.52-41.16,346A25.18,25.18,0,0,1-66,367.82H-365.72a25.16,25.16,0,0,1-25-27.11C-364.21-3.54-91.28-278.14,250.52-304.18A25.12,25.12,0,0,1,277.37-279V23A25.24,25.24,0,0,1,255.64,48Z" transform="translate(444 354)"/></g>
 
