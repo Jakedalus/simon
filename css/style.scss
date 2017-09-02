@@ -9,6 +9,8 @@ html {
                                   supported by Chrome and Opera */
 }
 
+
+
 #app {
     width: 50%;
     margin: 0 auto;
@@ -16,11 +18,15 @@ html {
 //    background-image: url("../glass.jpg");
 }
 
+svg {
+    margin: 0 auto;
+}
+
 #simon-body {
     filter: url('#light');
     box-shadow: 50px 50px 0px black;
 //    opacity: .9;
-
+    
 }
 
 #controls {
@@ -131,6 +137,9 @@ html {
 @media (max-width: 500px) {
     #app {
         width: 100%;
+        margin: 0 auto;
+        position: relative;
+        left: 10px;
     }
 }
 
