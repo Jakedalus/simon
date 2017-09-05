@@ -471,12 +471,14 @@ if( !/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navig
     buttons.forEach(function(button) {
         console.log(button.id);
 
-        button.addEventListener('mousedown', function() {
+        button.addEventListener('mousedown', function(e) {
             pushDown(button.id);
+            console.log(e);
         });
 
-        button.addEventListener('mouseup', function() {
-           liftUp(button.id); 
+        button.addEventListener('mouseup', function(e) {
+            liftUp(button.id); 
+            console.log(e);
         });
 
     });
@@ -485,12 +487,14 @@ if( !/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navig
     buttons.forEach(function(button) {
         console.log(button.id);
 
-        button.addEventListener('touchstart', function() {
+        button.addEventListener('touchstart', function(e) {
             pushDown(button.id);
+            console.log(e);
         });
 
-        button.addEventListener('touchend', function() {
+        button.addEventListener('touchend', function(e) {
             liftUp(button.id);
+            console.log(e);
         });
 
     });

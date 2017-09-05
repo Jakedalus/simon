@@ -26,6 +26,16 @@ module.exports = function(grunt) {
             }
         },
         
+        connect: {
+            server: {
+                options: {
+                    host: 'localhost',
+                    port: 3000,
+                    livereload: true
+                }
+            }
+        }, // connect
+        
         watch: {
             scripts: {
                 files: ['js/*.js',
@@ -41,10 +51,11 @@ module.exports = function(grunt) {
 
     // Load the plugins
     grunt.loadNpmTasks("grunt-remove-logging");
+    grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.loadNpmTasks('grunt-contrib-sass');
     grunt.loadNpmTasks('grunt-contrib-watch');
 
     // Default task(s).
-    grunt.registerTask('default', ['removelogging', 'sass', 'watch']);
+    grunt.registerTask('default', ['removelogging', 'sass', 'connect', 'watch']);
 
 };

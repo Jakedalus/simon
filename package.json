@@ -18,6 +18,7 @@
   "homepage": "https://github.com/Jakedalus/simon#readme",
   "devDependencies": {
     "grunt": "^1.0.1",
+    "grunt-contrib-connect": "^1.0.2",
     "grunt-contrib-sass": "^1.0.0",
     "grunt-contrib-watch": "^1.0.0",
     "grunt-remove-logging": "^0.2.0"
