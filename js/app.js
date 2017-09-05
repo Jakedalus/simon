@@ -67,6 +67,7 @@ var strickMode = false;
 var powerOn = false;
 var playerMove = '';
 var position = 0;
+var ongoingTouches = [];
 
 var interval;
 
@@ -490,6 +491,9 @@ if( !/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navig
         button.addEventListener('touchstart', function(e) {
             pushDown(button.id);
             console.log(e);
+            var touches = e.changedTouches;
+            ongoingTouches.push(touches);
+            console.log(ongoingTouches);
         });
 
         button.addEventListener('touchend', function(e) {
