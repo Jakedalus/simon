@@ -383,43 +383,83 @@ function restartGame() {
     
 }
     
-startBtn.addEventListener('click', function() {
-    if(powerOn) {
-        if(!gameStarted) simonSays(false);
-        gameStarted = true;
-    }
-});
-
-strickBtn.addEventListener('click', function() {
-    if(powerOn) {
-        if(!gameStarted) {
-
-            strickMode = !strickMode;
-            if(strickMode) {
-                strickLight.classList.add('on');
-            } else {
-                strickLight.classList.remove('on');
-            }
-
-        } 
-    }
-});
 
 
 
-powerBtn.addEventListener('click', function() {
-    powerOn = !powerOn;
-    console.log(powerOn);
+if( !/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+    powerBtn.addEventListener('click', function() {
+        powerOn = !powerOn;
+        console.log(powerOn);
+
+        if(powerOn) {
+            powerSwitch.setAttribute('x', 760);
+            restartGame();
+
+        } else {
+            powerSwitch.setAttribute('x', 720);
+            ctrDisplay.textContent = '';
+        }
+    });
     
-    if(powerOn) {
-        powerSwitch.setAttribute('x', 760);
-        restartGame();
-        
-    } else {
-        powerSwitch.setAttribute('x', 720);
-        ctrDisplay.textContent = '';
-    }
-});
+    startBtn.addEventListener('click', function() {
+        if(powerOn) {
+            if(!gameStarted) simonSays(false);
+            gameStarted = true;
+        }
+    });
+
+    strickBtn.addEventListener('click', function() {
+        if(powerOn) {
+            if(!gameStarted) {
+
+                strickMode = !strickMode;
+                if(strickMode) {
+                    strickLight.classList.add('on');
+                } else {
+                    strickLight.classList.remove('on');
+                }
+
+            } 
+        }
+    });
+    
+} else {
+    powerBtn.addEventListener('touchstart', function() {
+        powerOn = !powerOn;
+        console.log("Power on:", powerOn);
+
+        if(powerOn) {
+            powerSwitch.setAttribute('x', 760);
+            restartGame();
+
+        } else {
+            powerSwitch.setAttribute('x', 720);
+            ctrDisplay.textContent = '';
+        }
+    });
+    
+    startBtn.addEventListener('touchstart', function() {
+        if(powerOn) {
+            if(!gameStarted) simonSays(false);
+            gameStarted = true;
+        }
+    });
+
+    strickBtn.addEventListener('touchstart', function() {
+        if(powerOn) {
+            if(!gameStarted) {
+
+                strickMode = !strickMode;
+                if(strickMode) {
+                    strickLight.classList.add('on');
+                } else {
+                    strickLight.classList.remove('on');
+                }
+
+            } 
+        }
+    });
+}
 
 function pushDown(id) {
     if(playersTurn && powerOn) {
@@ -467,8 +507,19 @@ function liftUp(id) {
     }
 }
 
+//window.addEventListener("touchstart", touchHandler, false);
+//
+//function touchHandler(event){
+//    if(event.touches.length > 1){
+//        //the event is multi-touch
+//        //you can then prevent the behavior
+//        event.preventDefault()
+//    }
+//}
+
 // Mouse Events
 if( !/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+    console.log("Adding Mouse Events!");
     buttons.forEach(function(button) {
         console.log(button.id);
 
@@ -485,23 +536,30 @@ if( !/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navig
     });
 } else {
     // Touch Events
+    console.log("Adding Touch Events!");
     buttons.forEach(function(button) {
         console.log(button.id);
 
         button.addEventListener('touchstart', function(e) {
+            e.stopPropagation();
+            
             console.log(e);
+            e.preventDefault();
             var touches = e.changedTouches;
             ongoingTouches.push(touches);
-            console.log(ongoingTouches);
-            var btnID = ongoingTouches.pop().target;
+            console.log("Adding ", touches, " to All touches: ", ongoingTouches);
+            var btnID = ongoingTouches.pop()[0].target.id;
             console.log("Touched: ", btnID);
-            pushDown(button.id);
+            pushDown(btnID);
             
         });
 
         button.addEventListener('touchend', function(e) {
+            e.stopPropagation();
             liftUp(button.id);
             console.log(e);
+            
+            
         });
 
     });
