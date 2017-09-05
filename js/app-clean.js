@@ -489,10 +489,13 @@ if( !/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navig
         
 
         button.addEventListener('touchstart', function(e) {
-            pushDown(button.id);
             
             var touches = e.changedTouches;
             ongoingTouches.push(touches);
+            
+            var btnID = ongoingTouches.pop().target;
+            
+            pushDown(button.id);
             
         });
 
