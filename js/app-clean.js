@@ -545,12 +545,12 @@ if( !/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navig
             
             
             e.preventDefault();
-            var touches = e.changedTouches;
-            ongoingTouches.push(touches);
-            
-            var btnID = ongoingTouches.pop()[0].target.id;
-            
-            pushDown(btnID);
+            var touch = e.changedTouches[0];
+//            ongoingTouches.push(touch);
+//            
+//            var btnID = ongoingTouches.pop()[0].target.id;
+//            
+            pushDown(touch.target.id);
             
         });
 

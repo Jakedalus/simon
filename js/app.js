@@ -545,12 +545,12 @@ if( !/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navig
             
             console.log(e);
             e.preventDefault();
-            var touches = e.changedTouches;
-            ongoingTouches.push(touches);
-            console.log("Adding ", touches, " to All touches: ", ongoingTouches);
-            var btnID = ongoingTouches.pop()[0].target.id;
-            console.log("Touched: ", btnID);
-            pushDown(btnID);
+            var touch = e.changedTouches[0];
+//            ongoingTouches.push(touch);
+//            console.log("Adding ", touches, " to All touches: ", ongoingTouches);
+//            var btnID = ongoingTouches.pop()[0].target.id;
+//            console.log("Touched: ", btnID);
+            pushDown(touch.target.id);
             
         });
 
