@@ -494,7 +494,7 @@ if( !/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navig
             ongoingTouches.push(touches);
             console.log(ongoingTouches);
             var btnID = ongoingTouches.pop().target;
-            console.log(btnID);
+            console.log("Touched: ", btnID);
             pushDown(button.id);
             
         });
