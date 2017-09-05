@@ -541,25 +541,17 @@ if( !/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navig
         console.log(button.id);
 
         button.addEventListener('touchstart', function(e) {
-            e.stopPropagation();
-            
+
+            pushDown(button.id);
             console.log(e);
-            e.preventDefault();
-            var touch = e.changedTouches[0];
-//            ongoingTouches.push(touch);
-//            console.log("Adding ", touches, " to All touches: ", ongoingTouches);
-//            var btnID = ongoingTouches.pop()[0].target.id;
-//            console.log("Touched: ", btnID);
-            pushDown(touch.target.id);
             
         });
 
         button.addEventListener('touchend', function(e) {
-            e.stopPropagation();
-            liftUp(button.id);
+            
+            liftUp(button.id); 
             console.log(e);
-            
-            
+
         });
 
     });

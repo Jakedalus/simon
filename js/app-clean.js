@@ -541,25 +541,17 @@ if( !/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navig
         
 
         button.addEventListener('touchstart', function(e) {
-            e.stopPropagation();
+
+            pushDown(button.id);
             
-            
-            e.preventDefault();
-            var touch = e.changedTouches[0];
-//            ongoingTouches.push(touch);
-//            
-//            var btnID = ongoingTouches.pop()[0].target.id;
-//            
-            pushDown(touch.target.id);
             
         });
 
         button.addEventListener('touchend', function(e) {
-            e.stopPropagation();
-            liftUp(button.id);
             
+            liftUp(button.id); 
             
-            
+
         });
 
     });
