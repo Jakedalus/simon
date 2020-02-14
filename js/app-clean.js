@@ -516,7 +516,12 @@ function liftUp(id) {
 //    }
 // }
 
-buttons.forEach(function(button) {
+
+
+// Mouse Events
+if( !/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+    
+    buttons.forEach(function(button) {
         
 
         button.addEventListener('mousedown', function(e) {
@@ -530,41 +535,23 @@ buttons.forEach(function(button) {
         });
 
     });
-
-// Mouse Events
-// if( !/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+// Touch Events
+} else {
     
-//     buttons.forEach(function(button) {
+    buttons.forEach(function(button) {
         
 
-//         button.addEventListener('mousedown', function(e) {
-//             pushDown(button.id);
-            
-//         });
+        button.addEventListener('touchstart', function(e) {
+          if(event.touches.length === 1) {
+            pushDown(button.id);
+          }
+        });
 
-//         button.addEventListener('mouseup', function(e) {
-//             liftUp(button.id); 
-            
-//         });
+        button.addEventListener('touchend', function(e) {
+            liftUp(button.id); 
+        });
 
-//     });
-// } else {
-//     // Touch Events
-    
-//     buttons.forEach(function(button) {
-        
-
-//         button.addEventListener('touchstart', function(e) {
-//           if(event.touches.length === 1) {
-//             pushDown(button.id);
-//           }
-//         });
-
-//         button.addEventListener('touchend', function(e) {
-//             liftUp(button.id); 
-//         });
-
-//     });
-// }
+    });
+}
 
 
