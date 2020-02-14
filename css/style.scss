@@ -66,12 +66,14 @@ svg {
     fill: rgb(176, 29, 15);
     stroke: black;
     stroke-width: 15px;
+    cursor: pointer;
 }
 
 #strick {
     fill: rgb(191, 185, 37);
     stroke: black;
     stroke-width: 15px;
+    cursor: pointer;
 }
 
 #strickLight {
@@ -86,6 +88,7 @@ svg {
 #power-switch {
     fill: rgb(1, 109, 186);
     transition: x .2s;
+    cursor: pointer;
 }
 
 .btn {
@@ -99,7 +102,7 @@ svg {
 //    
 //    -webkit-mask-mode: luminance;
 //    mask-mode: luminance;
-    
+      cursor: pointer;
 }
 
 .item {

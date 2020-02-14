@@ -67,12 +67,14 @@ svg {
   fill: #b01d0f;
   stroke: black;
   stroke-width: 15px;
+  cursor: pointer;
 }
 
 #strick {
   fill: #bfb925;
   stroke: black;
   stroke-width: 15px;
+  cursor: pointer;
 }
 
 #strickLight {
@@ -84,13 +86,22 @@ svg {
   fill: #b01d0f;
 }
 
+#power {
+  cursor: pointer;
+}
+
 #power-switch {
   fill: #016dba;
   transition: x .2s;
+  cursor: pointer;
 }
 
 .item {
   mask: url(#masking);
+}
+
+.btn {
+  cursor: pointer;
 }
 
 #red-btn {
