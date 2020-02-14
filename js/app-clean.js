@@ -128,7 +128,7 @@ function stopBlue() {
 }
 
 function playLightAndSound(tile) {
-    
+    if (powerOn) {
     switch(tile) {
             case 'green-btn':
                 playGreen();
@@ -155,7 +155,8 @@ function playLightAndSound(tile) {
                 }, 500);
                 break;
 
-        }
+    }
+    }
     
     
 }
@@ -190,7 +191,6 @@ function simonSays(tryAgain) {
     var ctr = 0;
     interval = setInterval(function() {
         playersTurn = false;
-        
         
         playLightAndSound(sequence[ctr]);
         ctr++;
@@ -374,7 +374,6 @@ function playerWon() {
 }
 
 function restartGame() {
-    
     sequence = [];
     position = 0;
     gameStarted = false;
