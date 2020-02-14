@@ -508,13 +508,13 @@ function liftUp(id) {
 
 //window.addEventListener("touchstart", touchHandler, false);
 //
-function touchHandler(event){
-   if(event.touches.length > 1){
-       //the event is multi-touch
-       //you can then prevent the behavior
-       event.preventDefault()
-   }
-//}
+// function touchHandler(event){
+//    if(event.touches.length > 1){
+//        //the event is multi-touch
+//        //you can then prevent the behavior
+//        event.preventDefault()
+//    }
+// }
 
 // Mouse Events
 if( !/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
